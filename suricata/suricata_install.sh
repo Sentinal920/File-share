@@ -7,11 +7,11 @@ sudo chmod 640 /etc/suricata/rules/*.rules
 
 wget -O suricata.yaml https://raw.githubusercontent.com/Sentinal920/File-share/main/suricata/suricata.yaml
 
-// Add your local ip [ifconfig/ip a]
+# Add your local ip [ifconfig/ip a]
 ip=192.168.182.151/24
 sed -i "s|CHANGE_MY_IP|$ip|g" /etc/suricata/suricata.yaml
 
-// Add your adaptername [ifconfig/ip a]
+# Add your adaptername [ifconfig/ip a]
 adapter="ens33"
 sed -i "s|CHANGE_MY_ADAPTER|$adapter|g" /etc/suricata/suricata.yaml
 
