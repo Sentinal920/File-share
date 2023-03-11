@@ -48,12 +48,14 @@ But wazuh agents will only send default logs collected. To integrate other logs 
 - [1] Falco
 - [2] Osquery
 - [3] Sysmon
+- [4] Suricata
 
 ```mermaid
 graph TD;
     Falco-->Wazuh-Agent-1;
     Osquery-->Wazuh-Agent-1;
     Sysmon-->Wazuh-Agent-1;
+    Suricata-->Wazuh-Agent-1;
     Wazuh-Agent-1-->Wazuh-Server;
 ```
 
@@ -236,6 +238,36 @@ To send "sysmon logs" to wazuh server add following into agent's ossec.conf file
     <location>/var/log/syslog</location>
   </localfile>
 ```
+
+#### [4] Install Suricata in Ubuntu 20.04
+```mermaid
+graph TD;
+    Suricata-->Wazuh-Agent;
+    Wazuh-Agent-->Wazuh-Server;
+```
+
+```bash
+sudo add-apt-repository ppa:oisf/suricata-stable
+sudo apt-get update -y
+sudo apt-get install wget curl suricata -y
+cd /tmp/ && curl -LO https://rules.emergingthreats.net/open/suricata-6.0.8/emerging.rules.tar.gz
+sudo tar -xvzf emerging.rules.tar.gz && sudo mv rules/*.rules /etc/suricata/rules/
+sudo chmod 640 /etc/suricata/rules/*.rules
+
+wget -O /etc/suricata/suricata.yaml https://raw.githubusercontent.com/Sentinal920/File-share/main/suricata/suricata.yaml
+
+# Add your local ip [ifconfig/ip a]
+ip=192.168.182.151/24
+sed -i "s|CHANGE_MY_IP|$ip|g" /etc/suricata/suricata.yaml
+
+# Add your adaptername [ifconfig/ip a]
+adapter="ens33"
+sed -i "s|CHANGE_MY_ADAPTER|$adapter|g" /etc/suricata/suricata.yaml
+
+sudo systemctl restart suricata
+```
+
+
 
 So we finally now have the logs configured in ubuntu VM that'll send all logs to wazuh server using the wazuh agent
 
