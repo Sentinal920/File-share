@@ -267,6 +267,16 @@ sed -i "s|CHANGE_MY_ADAPTER|$adapter|g" /etc/suricata/suricata.yaml
 sudo systemctl restart suricata
 ```
 
+Edit wazuh-agent's config file `/var/ossec/etc/ossec.conf` and add following to enable the wazuh agent to be able to send logs to wazuh server
+
+```
+<ossec_config>
+  <localfile>
+    <log_format>json</log_format>
+    <location>/var/log/suricata/eve.json</location>
+  </localfile>
+</ossec_config>
+```
 
 
 So we finally now have the logs configured in ubuntu VM that'll send all logs to wazuh server using the wazuh agent
