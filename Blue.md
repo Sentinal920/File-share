@@ -277,6 +277,7 @@ Edit wazuh-agent's config file `/var/ossec/etc/ossec.conf` and add following to 
   </localfile>
 </ossec_config>
 ```
+> sudo systemctl restart wazuh-agent
 
 
 So we finally now have the logs configured in ubuntu VM that'll send all logs to wazuh server using the wazuh agent
