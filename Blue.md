@@ -13,6 +13,7 @@ curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
 ```powershell
 	certutil -urlcache -f https://packages.wazuh.com/4.x/windows/wazuh-agent-4.3.10-1.msi wazuh-agent-4.3.10-1.msi
 	.\wazuh-agent-4.3.10-1.msi /q WAZUH_MANAGER="172.16.8.121"
+	NET START WazuhSvc
 ```
 
 **Linux**
@@ -21,6 +22,8 @@ curl -sO https://packages.wazuh.com/4.3/wazuh-install.sh
 	echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 	apt-get update -y
 	WAZUH_MANAGER="172.16.8.121" apt-get install wazuh-agent -y
+	systemctl enable wazuh-agent
+	systemctl start wazuh-agent
 ```
 
 **Wazuh Agents default config location**
