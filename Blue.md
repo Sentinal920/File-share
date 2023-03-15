@@ -381,6 +381,9 @@ To Send Eventchannel logs back to wazuh server add following in agent's ossec.co
 
 #### [4] Enable DC audit logs
 
+```
+Install-WindowsFeature GPMC
+```
 ```powershell
 # Enable Audit policies in gpmc.msc -> Default Domain Policy)
 $domain_name = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().Name
