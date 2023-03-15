@@ -321,13 +321,12 @@ timeout 5
 wevtutil im "C:\Program Files\osquery\osquery.man" 
 ```
 
-To send this logs to wazuh server add this in agent file `(C:\Program Files (x86)\ossec-agent\ossec.conf)`
+To send this logs to wazuh server edit agent file and turn disabled to no for osquery `(C:\Program Files (x86)\ossec-agent\ossec.conf)`
 
 ```
-		<localfile>
-			<location>Applications and Services Logs/Facebook/osquery</location>
-			<log_format>eventchannel</log_format>
-		</localfile>
+		<wodle name="osquery">
+		  <disabled>no</disabled>
+		  ...
 ```
 
 #### [2] Install Sysmon in windows
