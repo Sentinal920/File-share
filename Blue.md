@@ -286,6 +286,16 @@ Edit wazuh-agent's config file `/var/ossec/etc/ossec.conf` and add following to 
 
 So we finally now have the logs configured in ubuntu VM that'll send all logs to wazuh server using the wazuh agent
 
+## Enable Apache2 POST logging in /var/log/error.log
+```
+sudo a2enmod dump_io
+cat <<EOF>> /etc/apache2/apache2.conf
+DumpIOInput On
+DumpIOOutput On
+LogLevel dumpio:trace7
+EOF
+systemctl restart apache2
+```
 
 ## Let's install & configure these log collectors in windows
 
