@@ -53,7 +53,7 @@ But wazuh agents will only send default logs collected. To integrate other logs 
 - [2] Osquery
 - [3] Sysmon
 - [4] Suricata
-- [x] Enable POST logging in apache2
+- [5] Enable POST logging in apache2
 
 ```mermaid
 graph TD;
@@ -287,7 +287,7 @@ Edit wazuh-agent's config file `/var/ossec/etc/ossec.conf` and add following to 
 
 So we finally now have the logs configured in ubuntu VM that'll send all logs to wazuh server using the wazuh agent
 
-#### [x] Enable Apache2 POST logging in /var/log/error.log
+#### [5] Enable Apache2 POST logging in /var/log/error.log
 ```
 sudo a2enmod dump_io
 cat <<EOF>> /etc/apache2/apache2.conf
