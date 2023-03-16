@@ -290,7 +290,7 @@ So we finally now have the logs configured in ubuntu VM that'll send all logs to
 #### [5] Enable Apache2 POST logging in /var/log/error.log
 ```
 sudo a2enmod dump_io
-cat <<EOF>> /etc/apache2/apache2.conf
+cat <<EOF >> /etc/apache2/apache2.conf
 DumpIOInput On
 DumpIOOutput On
 LogLevel dumpio:trace7
