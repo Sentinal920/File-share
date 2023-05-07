@@ -54,7 +54,7 @@ systemctl restart limacharlie
 
 ## Configure Routing for INTERNAL adapters to be able to ping lab_controller (-> internet)
 #### LINUX (ens160 is DHCP interface and ens192 is INTERNAL interface)
-Run following script in DHCP VM & Change Gateways for the VMs having INTERNAL adapters to point out to INTERNAL IP of VM having DHCP+INTERNAL adapter
+Run following script in DHCP VM & Change Gateways for the rest of the VMs having INTERNAL adapters to point out to INTERNAL IP of VM having DHCP+INTERNAL adapter
 ```bash
 apt update -y && apt install iptables-persistent -y
 echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
