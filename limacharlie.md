@@ -49,3 +49,29 @@ WantedBy=multi-user.target
 # After changing installation key restart the service
 systemctl restart limacharlie
 ```
+
+## Configure Routing for INTERNAL adapters to be able to ping lab_controller (-> internet)
+#### LINUX (ens160 is DHCP interface and ens192 is INTERNAL interface)
+Change Gateway for VMs having INTERNAL adapters to point out to INTERNAL IP of VM having DHCP+INTERNAL adapter
+```
+apt update -y && apt install iptables-persistent -y
+echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
+sysctl -p
+iptables -A FORWARD -i ens192 -o ens160 -j ACCEPT
+iptables -A FORWARD -i  ens160 -o ens192 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -o ens160 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
+iptables-save > /etc/iptables/rules.v4
+```
+
+#### WINDOWS
+```
+'Network & Sharing Center' -> Edit DHCP adapter Ethernet Properties
+Click on Share & Share the internet connection with network
+
+
+Run following to persist network sharing after reboot
+New-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\SharedAccess -Name EnableRebootPersistConnection -Value 1 -PropertyType dword
+Set-Service SharedAccess –startuptype automatic –passthru
+Start-Service SharedAccess
+```
