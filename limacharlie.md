@@ -52,7 +52,7 @@ systemctl restart limacharlie
 
 ## Configure Routing for INTERNAL adapters to be able to ping lab_controller (-> internet)
 #### LINUX (ens160 is DHCP interface and ens192 is INTERNAL interface)
-Change Gateway for VMs having INTERNAL adapters to point out to INTERNAL IP of VM having DHCP+INTERNAL adapter
+Run following script in DHCP VM & Change Gateways for the VMs having INTERNAL adapters to point out to INTERNAL IP of VM having DHCP+INTERNAL adapter
 ```bash
 apt update -y && apt install iptables-persistent -y
 echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.conf
@@ -66,11 +66,14 @@ iptables-save > /etc/iptables/rules.v4
 
 #### WINDOWS
 ```
+Note down the static IP of INTERNAL adapter inside DHCP VM
 'Network & Sharing Center' -> Edit DHCP adapter Ethernet Properties
-Click on Share & Share the internet connection with network
+Click on Share & Share the internet connection with network.
+After sharing the static IP of TNTERNAL adapter would be replaced with 192.168.x.x. 
+Replace that again with original static IP of INTERNAL adapter that was previously noted down.
 
+Once done, run following to persist network sharing after reboot
 
-Run following to persist network sharing after reboot
 New-ItemProperty -Path HKLM:\Software\Microsoft\Windows\CurrentVersion\SharedAccess -Name EnableRebootPersistConnection -Value 1 -PropertyType dword
 Set-Service SharedAccess –startuptype automatic –passthru
 Start-Service SharedAccess
