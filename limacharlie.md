@@ -66,11 +66,11 @@ iptables-save > /etc/iptables/rules.v4
 
 #### WINDOWS
 ```
-Note down the static IP of INTERNAL adapter inside DHCP VM
-'Network & Sharing Center' -> Edit DHCP adapter Ethernet Properties
-Click on Share & Share the internet connection with network.
-After sharing the static IP of TNTERNAL adapter would be replaced with 192.168.x.x. 
-Replace that again with original static IP of INTERNAL adapter that was previously noted down.
+- Note down the static IP of INTERNAL adapter inside DHCP VM
+- 'Network & Sharing Center' -> Edit DHCP adapter Ethernet Properties
+- Click on Share & Share the internet connection with network.
+- After sharing the static IP of TNTERNAL adapter would be replaced with 192.168.x.x. 
+- Replace that again with original static IP of INTERNAL adapter that was previously noted down.
 
 Once done, run following to persist network sharing after reboot
 
