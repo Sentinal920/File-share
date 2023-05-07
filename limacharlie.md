@@ -30,7 +30,7 @@ echo "limacharlie limacharlie/installation_key string AAAABgAAAQsFAAAAIzRkODk3MD
 
 #### INSTALLATION_KEY is saved in /etc/systemd/system/limacharlie.service 
 ```
-cat <<EOF >  /etc/systemd/system/limacharlie.service 
+cat /etc/systemd/system/limacharlie.service 
 [Unit]
 Description=LimaCharlie Agent
 [Service]
@@ -44,7 +44,7 @@ StandardOutput=null
 StandardError=null
 [Install]
 WantedBy=multi-user.target
-EOF
+
 
 # After changing installation key restart the service
 systemctl restart limacharlie
