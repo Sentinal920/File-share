@@ -304,6 +304,7 @@ systemctl restart apache2
 - [2] Sysmon
 - [3] Windows Eventlog/EventChannel Logs
 - [4] DC audit logs
+- [5] Enable Powershell Logging
 
 ```mermaid
 graph TD;
@@ -435,4 +436,10 @@ add-content -path $path -value "<?xml version='1.0' encoding='utf-8'?>`r`n
 $guid=(Get-GPO -Name 'Default Domain Policy').Id.ToString() 
 Set-GPRegistryValue -GUID $guid -Key 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit' -Type DWORD -Valuename ProcessCreationIncludeCmdLine_Enabled -Value 1
 gpupdate /force
+```
+#### [4] Enable Powershell logging
+```
+certutil -urlcache -f https://raw.githubusercontent.com/MHaggis/notes/master/utilities/Invoke-SPLPowerShellAuditLogging.ps1 Invoke-SPLPowerShellAuditLogging.ps1
+import-module Invoke-SPLPowerShellAuditLogging.ps1
+Invoke-SPLPowerShellAuditLogging -method EnableAllLogging
 ```
